@@ -53,15 +53,12 @@ if (process.env.NODE_ENV === "development") {
   const server = createServer(app);
   await setupVite(app, server);
   
-  // Only start server if not in Vercel environment
-  if (process.env.VERCEL !== "1") {
-    const port = parseInt(process.env.PORT || '3000', 10);
-    const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
-    
-    server.listen(port, host, () => {
-      log(`serving on ${host}:${port}`);
-    });
-  }
+  const port = parseInt(process.env.PORT || '3000', 10);
+  const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+  
+  server.listen(port, host, () => {
+    log(`serving on ${host}:${port}`);
+  });
 } else {
   serveStatic(app);
 }
