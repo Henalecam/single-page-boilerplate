@@ -36,30 +36,35 @@ app.use((req, res, next) => {
   next();
 });
 
-(async () => {
-  const server = await registerRoutes(app);
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  const status = err.status || err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
+  res.status(status).json({ message });
+  throw err;
+});
 
-    res.status(status).json({ message });
-    throw err;
-  });
+// Register API routes
+await registerRoutes(app);
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
-
-  const port = parseInt(process.env.PORT || '3000', 10);
-  const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+// Setup static file serving
+if (process.env.NODE_ENV === "development") {
+  const { createServer } = await import("http");
+  const server = createServer(app);
+  await setupVite(app, server);
   
-  server.listen(port, host, () => {
-    log(`serving on ${host}:${port}`);
-  });
-})();
+  // Only start server if not in Vercel environment
+  if (process.env.VERCEL !== "1") {
+    const port = parseInt(process.env.PORT || '3000', 10);
+    const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+    
+    server.listen(port, host, () => {
+      log(`serving on ${host}:${port}`);
+    });
+  }
+} else {
+  serveStatic(app);
+}
+
+// Export for Vercel
+export default app;

@@ -1,10 +1,9 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactMessageSchema } from "@shared/schema";
 import { z } from "zod";
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export async function registerRoutes(app: Express): Promise<void> {
   // Contact form submission endpoint
   app.post("/api/contact", async (req, res) => {
     try {
@@ -52,7 +51,4 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     }
   });
-
-  const httpServer = createServer(app);
-  return httpServer;
 }
