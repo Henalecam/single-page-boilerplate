@@ -26,7 +26,7 @@ A modern landing page boilerplate built with React, TypeScript, and Express.js. 
 - Express.js with TypeScript
 - RESTful API design
 - Zod schemas for validation
-- Drizzle ORM for database operations
+- In-memory storage (easily replaceable with database)
 
 ## Getting Started
 
@@ -59,11 +59,54 @@ A modern landing page boilerplate built with React, TypeScript, and Express.js. 
 
 ## Deployment
 
-This project is configured for deployment on Vercel:
+### Vercel (Recommended)
 
-1. Connect your repository to Vercel
-2. The build process will automatically run `npm run build`
-3. The application will be deployed with the configuration in `vercel.json`
+This project is optimized for deployment on Vercel:
+
+#### Prerequisites
+- GitHub repository
+- Vercel account
+
+#### Deploy Steps
+
+1. **Push to GitHub**:
+   ```bash
+   git add .
+   git commit -m "Ready for Vercel deployment"
+   git push origin main
+   ```
+
+2. **Connect to Vercel**:
+   - Go to [vercel.com](https://vercel.com)
+   - Click "New Project"
+   - Import your GitHub repository
+   - Vercel will auto-detect the configuration
+
+3. **Deploy**:
+   - Click "Deploy"
+   - Wait for build to complete
+   - Access your live site
+
+#### Configuration
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist/public`
+- **Install Command**: `npm install`
+- **Node.js Version**: 18.x
+
+#### Environment Variables
+Copy `.env.example` to `.env.local` for local development. No environment variables are required for basic functionality.
+
+#### URLs
+- **Frontend**: `https://your-project.vercel.app/`
+- **API**: `https://your-project.vercel.app/api/contact`
+
+### Other Platforms
+
+This project can also be deployed on:
+- Netlify
+- Railway
+- Render
+- Any Node.js hosting platform
 
 ## Project Structure
 

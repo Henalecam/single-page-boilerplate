@@ -54,7 +54,7 @@ if (process.env.NODE_ENV === "development") {
   await setupVite(app, server);
   
   const port = parseInt(process.env.PORT || '3000', 10);
-  const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+  const host = 'localhost';
   
   server.listen(port, host, () => {
     log(`serving on ${host}:${port}`);
