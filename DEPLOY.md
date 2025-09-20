@@ -6,8 +6,9 @@
 
 - **Dependências Limpas**: Removidas dependências desnecessárias que causavam problemas
 - **Schema Simplificado**: Substituído Drizzle por schemas Zod simples
-- **Configuração Otimizada**: vercel.json configurado corretamente
+- **Configuração Otimizada**: vercel.json e vercel.config.js configurados corretamente
 - **Build Testado**: Processo de build funcionando perfeitamente
+- **Dependência Adicionada**: nanoid instalado para funcionamento correto
 - **Documentação Atualizada**: Instruções claras de deploy
 
 ### Pré-requisitos
@@ -36,6 +37,11 @@ git push origin main
    - **Output Directory**: `dist/public`
    - **Install Command**: `npm install`
    - **Node.js Version**: 18.x
+   
+   **Nota**: Se a detecção automática não funcionar, configure manualmente:
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist/public`
+   - **Install Command**: `npm install`
 
 ### 3. Deploy
 1. Clique em "Deploy"
@@ -53,6 +59,8 @@ git push origin main
 │       ├── index.html
 │       └── assets/
 ├── vercel.json           # ✅ Configuração otimizada
+├── vercel.config.js      # ✅ Configuração alternativa
+├── .vercelignore         # ✅ Arquivos ignorados no deploy
 ├── .env.example          # ✅ Exemplo de variáveis de ambiente
 └── package.json          # ✅ Dependências limpas e otimizadas
 ```
@@ -64,6 +72,8 @@ git push origin main
 - ❌ **Dependências opcionais problemáticas** → ✅ **REMOVIDAS**
 - ❌ **Configuração não otimizada** → ✅ **OTIMIZADA**
 - ❌ **Build falhando** → ✅ **FUNCIONANDO PERFEITAMENTE**
+- ❌ **Dependência nanoid faltando** → ✅ **INSTALADA**
+- ❌ **Configuração Vercel incompleta** → ✅ **COMPLETA E OTIMIZADA**
 
 ## URLs Importantes
 - **Frontend**: `https://seu-dominio.vercel.app/`
