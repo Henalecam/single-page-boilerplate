@@ -97,10 +97,22 @@ export function Navbar() {
               {/* Dark Mode Toggle */}
               <button
                 onClick={handleThemeToggle}
-                className="p-2 text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="relative p-2 rounded-lg bg-muted hover:bg-accent text-muted-foreground hover:text-foreground transition-all duration-200 group"
                 data-testid="theme-toggle"
+                title={theme === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'}
               >
-                {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+                <div className="relative w-5 h-5">
+                  <Moon className={`w-5 h-5 absolute transition-all duration-300 ${
+                    theme === 'light' 
+                      ? 'opacity-100 rotate-0 scale-100' 
+                      : 'opacity-0 rotate-180 scale-75'
+                  }`} />
+                  <Sun className={`w-5 h-5 absolute transition-all duration-300 ${
+                    theme === 'dark' 
+                      ? 'opacity-100 rotate-0 scale-100' 
+                      : 'opacity-0 -rotate-180 scale-75'
+                  }`} />
+                </div>
               </button>
             </div>
           </div>
@@ -154,10 +166,21 @@ export function Navbar() {
               <div className="border-t border-border pt-3 mt-3">
                 <button
                   onClick={handleThemeToggle}
-                  className="flex items-center text-muted-foreground hover:text-primary transition-colors duration-200 px-3 py-2 text-sm font-medium w-full text-left"
+                  className="flex items-center text-muted-foreground hover:text-primary transition-all duration-200 px-3 py-2 text-sm font-medium w-full text-left rounded-lg hover:bg-accent"
                   data-testid="mobile-theme-toggle"
                 >
-                  {theme === 'light' ? <Moon className="w-5 h-5 mr-3" /> : <Sun className="w-5 h-5 mr-3" />}
+                  <div className="relative w-5 h-5 mr-3">
+                    <Moon className={`w-5 h-5 absolute transition-all duration-300 ${
+                      theme === 'light' 
+                        ? 'opacity-100 rotate-0 scale-100' 
+                        : 'opacity-0 rotate-180 scale-75'
+                    }`} />
+                    <Sun className={`w-5 h-5 absolute transition-all duration-300 ${
+                      theme === 'dark' 
+                        ? 'opacity-100 rotate-0 scale-100' 
+                        : 'opacity-0 -rotate-180 scale-75'
+                    }`} />
+                  </div>
                   {theme === 'light' ? 'Modo Escuro' : 'Modo Claro'}
                 </button>
               </div>
